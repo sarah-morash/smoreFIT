@@ -1,0 +1,40 @@
+scalar AWSDate
+
+type User @model @aws_api_key {
+  id: ID!
+  userName: String!
+  name: String
+  age: Int
+  weight: Float
+  bodyFat: Float
+  settings: Settings @connection(name: "UserSettings")
+  log: ExerciseLog @connection(name: "UserLog")
+}
+type ExerciseLog @model @aws_api_key {
+  id: ID!
+  name: String
+  exercise: [Exercise] @connection(name: "LoggedExercises")
+  user: User @connection(name: "UserLog")
+}
+type Exercise @model @aws_api_key {
+  id: ID!
+  date: AWSDate!
+  type: String!
+  name: String!
+  sets: [Set] @connection(name: "ExerciseSets")
+  log: ExerciseLog @connection(name: "LoggedExercises")
+}
+type Settings @model @aws_api_key {
+  id: ID!
+  user: User @connection(name: "UserSettings")
+  lbs: Boolean
+  metric: Boolean
+  darkMode: Boolean
+}
+type Set @model @aws_api_key {
+  id: ID!
+  number: Int
+  reps: Int!
+  weight: String!
+  exercises: Exercise @connection(name: "ExerciseSets")
+}
