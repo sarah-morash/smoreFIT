@@ -4,20 +4,27 @@ import { ScrollView, StyleSheet, Text } from "react-native";
 const Calendar = () => {
   return (
     <ScrollView style={styles.container}>
-      <Text>LinksScreen</Text>
+      <Text>CALENDAR</Text>
     </ScrollView>
   );
 };
 
-LinksScreen.navigationOptions = {
-  title: "Links"
+Calendar.navigationOptions = {
+  header: null
 };
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    paddingTop: 15,
     backgroundColor: "#fff"
+  },
+  contentContainer: {
+    paddingTop: 30
+  },
+  welcomeContainer: {
+    alignItems: "center",
+    marginTop: 10,
+    marginBottom: 20
   }
 });
 

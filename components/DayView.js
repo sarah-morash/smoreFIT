@@ -1,5 +1,19 @@
-import React from "react";
+import React, { useReducer, useEffect } from "react";
 import { StyleSheet } from "react-native";
+import { listTodos } from "./src/graphql/queries";
+import { onCreateTodo } from "./src/graphql/subscriptions";
+
+const initialState = { todos: [] };
+const reducer = (state, action) => {
+  switch (action.type) {
+    case "QUERY":
+      return { ...state, todos: action.todos };
+    case "SUBSCRIPTION":
+      return { ...state, todos: [...state.todos, action.todo] };
+    default:
+      return state;
+  }
+};
 
 const exercies = [
   {
@@ -15,8 +29,34 @@ const exercies = [
 ];
 
 export default function DayView(props) {
+  const [state, dispatch] = useReducer(reducer, initialState);
+
+  useEffect(() => {
+    getData();
+
+    const subscription = API.graphql(graphqlOperation(onCreateTodo)).subscribe({
+      next: eventData => {
+        const todo = eventData.value.data.onCreateTodo;
+        dispatch({ type: "SUBSCRIPTION", todo });
+      }
+    });
+    return () => subscription.unsubscribe();
+  }, []);
+
+  async function getData() {
+    const todoData = await API.graphql(graphqlOperation(listTodos));
+    dispatch({ type: "QUERY", todos: todoData.data.listTodos.items });
+  }
+
   return (
     <View style={styles.day}>
+      <Button onPress={createNewTodo} title="Create Todo" />
+      {state.todos.map((todo, i) => (
+        <Text key={todo.id}>
+          {todo.name} : {todo.description}
+        </Text>
+      ))}
+
       {exercies.map(exercise => (
         <View style={styles.exercise}>
           <Text style={styles.name}>{exercise.name}</Text>

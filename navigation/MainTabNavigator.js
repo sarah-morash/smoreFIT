@@ -28,8 +28,8 @@ HomeStack.navigationOptions = {
       focused={focused}
       name={
         Platform.OS === "ios"
-          ? `ios-information-circle${focused ? "" : "-outline"}`
-          : "md-information-circle"
+          ? `ios-home${focused ? "" : "-outline"}`
+          : "md-home"
       }
     />
   )
@@ -49,12 +49,12 @@ TrackStack.navigationOptions = {
   tabBarIcon: ({ focused }) => (
     <TabBarIcon
       focused={focused}
-      name={Platform.OS === "ios" ? "ios-link" : "md-link"}
+      name={Platform.OS === "ios" ? "ios-rocket" : "md-rocket"}
     />
   )
 };
 
-LinksStack.path = "";
+TrackStack.path = "";
 
 const CalendarStack = createStackNavigator(
   {
@@ -68,7 +68,7 @@ CalendarStack.navigationOptions = {
   tabBarIcon: ({ focused }) => (
     <TabBarIcon
       focused={focused}
-      name={Platform.OS === "ios" ? "ios-options" : "md-options"}
+      name={Platform.OS === "ios" ? "ios-calendar" : "md-calendar"}
     />
   )
 };

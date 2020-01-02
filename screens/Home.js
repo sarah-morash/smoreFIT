@@ -14,7 +14,7 @@ const Home = () => (
   </View>
 );
 
-HomeScreen.navigationOptions = {
+Home.navigationOptions = {
   header: null
 };
 
