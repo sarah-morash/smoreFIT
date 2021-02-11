@@ -28,7 +28,7 @@ const exercies = [
   }
 ];
 
-export default function DayView(props) {
+const DayView = props => {
   const [state, dispatch] = useReducer(reducer, initialState);
 
   useEffect(() => {
@@ -73,7 +73,7 @@ export default function DayView(props) {
       ))}
     </View>
   );
-}
+};
 
 const styles = StyleSheet.create({
   container: {
@@ -106,3 +106,5 @@ const styles = StyleSheet.create({
     color: "#fff"
   }
 });
+
+export default DayView;

@@ -6,7 +6,7 @@ import { Platform, StatusBar, StyleSheet, View } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 
 import AppNavigator from "./navigation/AppNavigator";
-import Header from "./components/Header";
+import Head from "./components/Head";
 
 export default function App(props) {
   const [isLoadingComplete, setLoadingComplete] = useState(false);
@@ -23,7 +23,7 @@ export default function App(props) {
     return (
       <View style={styles.container}>
         {Platform.OS === "ios" && <StatusBar barStyle="default" />}
-        <Header />
+        <Head />
         <AppNavigator />
       </View>
     );
